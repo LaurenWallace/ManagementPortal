@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Reimbursements Overview</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/createViewEmployeeReimbursements.js"></script>
+<style>
+.navbar-brand {
+	margin-top: 10em;
+	margin-bottom: 10em;
+	padding-left: 20em;
+	padding-right: 20em;
+}
+.nav-link {
+	margin-top: 10em;
+	margin-bottom: 10em;
+	padding-left: 5em;
+	padding-right: 5em;
+}
+.hr {
+	font-family: Serif;
+}
+.p {
+	font-family: Georgia;
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <!-- Navbar content -->
+  <a href="http://glyphicons.com/"><span class="glyphicon glyphicon-user"></span></a>
+  <span class="h6" class="navbar-brand mb-0" id="welcome"></span>
+  <a class="nav-link" href="logout">Logout</a>
+  <a class="nav-link" href="managerHomePage.html">View Profile</a>
+  <a class="nav-link" href="viewEmployees">View Employees</a>
+  <a class="nav-link" href="EmployeeReimbursements.html">View Submitted Reimbursements</a> 
+</nav>
+
+<h2>Located here are all employee reimbursements.</h2>
+<br>
+<table id="reimsTable" class="display">
+	<thead>
+		<tr>
+			<th>Reimbursement Id</th>
+			<th>Start Date</th>
+			<th>Requester Name</th>
+			<th>Type</th>
+			<th>Status</th>
+			<th>Amount</th>
+			<th>Reason</th>
+			<th>Receipt</th>
+			<th>Resolver Name</th>
+			<th>Notes</th>
+			<th>Resolved Date</th>
+		</tr>
+	</thead>
+	<tbody id="empreimdata">
+	<!-- createViewReimbursements will fill this in -->
+	</tbody>
+</table>
+<br>
+<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#editStatus">Change Status</button>
+
+<!-- Modal -->
+<div class="modal fade" id="editStatus" role="dialog">
+	<div class="modal-dialog">
+
+	<!-- Modal content -->
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Changing Reimbursement Status</h4>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal" action="changeStatus" method="post">
+				<div class="form-group">
+        			<label for="reimid" class="control-label col-xs-2">Reimbursement Id:</label>
+        			<div class="col-xs-10">
+            			<input type="number" class="form-control" name="rid" id="rid" required>
+       				 </div>
+				</div>
+    			<div class="form-group">
+        			<label for="type" class="control-label col-xs-2">Status:</label>
+        			<div class="col-xs-10">
+            			<input list="stats" class="form-control" name="status" id="status" required>
+            			<datalist id="stats">
+            				<option id="1">Denied</option>
+            				<option id="2">Approved</option>
+            			</datalist>
+       				 </div>
+				</div>
+				<div class="modal-footer"><!-- data-dismiss="modal" -->
+					<button type="submit" id="submitStat" class="btn btn-default">Submit</button>
+				</div>
+    		</form>
+    	</div>
+	</div>
+	</div>
+</div>
+</body>
+</html>

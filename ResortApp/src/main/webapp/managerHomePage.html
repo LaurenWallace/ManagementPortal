@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Manager Home Page</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/createHome.js"></script>
+<style>
+.navbar-brand {
+	margin-top: 10em;
+	margin-bottom: 10em;
+	padding-left: 20em;
+	padding-right: 20em;
+}
+.nav-link {
+	margin-top: 10em;
+	margin-bottom: 10em;
+	padding-left: 5em;
+	padding-right: 5em;
+}
+.hr {
+	font-family: Serif;
+}
+.p {
+	font-family: Georgia;
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <!-- Navbar content -->
+  <a href="http://glyphicons.com/"><span class="glyphicon glyphicon-user"></span></a>
+  <span class="h6" class="navbar-brand mb-0" id="welcome"></span>
+  <a class="nav-link" href="logout">Logout</a>
+  <a class="nav-link" href="viewEmployees">View Employees</a>
+  <a class="nav-link" href="EmployeeReimbursements.html">View Submitted Reimbursements</a> 
+</nav>
+<span id="view">
+<!-- Use AJAX to inject HTML to view -->
+</span>
+
+<br>
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#editFN">Edit First Name</button>
+<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#editLN">Edit Last Name</button>
+<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#editEM">Edit Email</button>
+<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#editPW">Edit Password</button>
+
+<!-- Modal -->
+<div class="modal fade" id="editFN" role="dialog">
+	<div class="modal-dialog">
+
+	<!-- Modal content -->
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Changing First Name</h4>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal">
+    			<div class="form-group">
+        			<label for="firstname" class="control-label col-xs-2">First Name:</label>
+        			<div class="col-xs-10">
+            			<input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name" required>
+       				 </div>
+    			</div>
+    		</form>
+    	</div>
+    	<div class="modal-footer"><!-- data-dismiss="modal" -->
+			<button type="submit" id="submitFN" class="btn btn-default">Submit</button>
+		</div>
+	</div>
+	</div>
+</div>
+		
+<!-- Modal -->
+<div class="modal fade" id="editLN" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content -->
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Changing Last Name</h4>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal">
+    			<div class="form-group">
+        			<label for="lastname" class="control-label col-xs-2">Last Name:</label>
+        			<div class="col-xs-10">
+            			<input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name" required>
+       				 </div>
+    			</div>
+    		</form>
+    	</div>
+    	<div class="modal-footer"><!-- data-dismiss="modal" -->
+			<button type="submit" id="submitLN" class="btn btn-default">Submit</button>
+		</div>
+	</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editEM" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content -->
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Changing Email</h4>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal">
+    			<div class="form-group">
+        			<label for="email" class="control-label col-xs-2">Email:</label>
+        			<div class="col-xs-10">
+            			<input type="text" class="form-control" id="email" placeholder="Email" required>
+       				 </div>
+    			</div>
+    		</form>
+    	</div>
+    	<div class="modal-footer"><!-- data-dismiss="modal" -->
+			<button type="submit" id="submitEM" class="btn btn-default">Submit</button>
+		</div>
+	</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editPW" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content -->
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Changing Password</h4>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal">
+    			<div class="form-group">
+        			<label for="password" class="control-label col-xs-2">Password:</label>
+        			<div class="col-xs-10">
+            			<input type="text" class="form-control" id="password" placeholder="Password" required>
+       				 </div>
+    			</div>
+    		</form>
+    	</div>
+    	<div class="modal-footer"><!-- data-dismiss="modal" -->
+			<button type="submit" id="submitPW" class="btn btn-default">Submit</button>
+		</div>
+	</div>
+	</div>
+</div>
+
+</body>
+</html>

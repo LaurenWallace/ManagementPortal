@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Your Reimbursements</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/createViewReimbursements.js"></script>
+<style>
+.navbar-brand {
+	margin-top: 10em;
+	margin-bottom: 10em;
+	padding-left: 20em;
+	padding-right: 20em;
+}
+.nav-link {
+	margin-top: 10em;
+	margin-bottom: 10em;
+	padding-left: 5em;
+	padding-right: 5em;
+}
+.hr {
+	font-family: Serif;
+}
+.p {
+	font-family: Georgia;
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <!-- Navbar content -->
+  <a href="http://glyphicons.com/"><span class="glyphicon glyphicon-user"></span></a>
+  <span class="h6" class="navbar-brand mb-0" id="welcome"></span>
+  <a class="nav-link" href="logout">Logout</a>
+  <a class="nav-link" href="employeeHomePage.html">User Profile</a>
+  <a class="nav-link" href="Reimbursements.html">View Your Reimbursements</a> 
+</nav>
+
+<h2>Here is information about your reimbursements.</h2>
+<br>
+<table id="reimTable" class="display" width="100%">
+	<thead>
+		<tr>
+			<th>Reimbursement Id</th>
+			<th>Start Date</th>
+			<th>Type</th>
+			<th>Status</th>
+			<th>Amount</th>
+			<th>Reason</th>
+			<th>Receipt</th>
+			<th>Resolver Name</th>
+			<th>Resolver Notes</th>
+			<th>Resolved Date</th>
+		</tr>
+	</thead>
+	<tbody id="reimdata">
+	<!-- createViewReimbursements will fill this in -->
+	</tbody>
+</table>
+<br>
+
+<h2>Adding a New Reimbursement Request</h2>
+<br>
+<p>There are 2 options for adding a reimbursement:</p>
+<ul>
+<li>Basic</li>
+<li>Detailed</li>
+</ul>
+
+<div class="container">
+	<div class="col-lg-6">
+		<!-- Trigger the modal with a button -->
+		<p>Use the button below to create a basic reimbursement request. This means that you are providing the bare minimum
+		   in order to have your reimbursement approved or denied by a manager. The information you need for this 
+		   reimbursement submission is: reason for the reimbursement, amount you are asking to be reimbursed, and 
+		   the type of reimbursement your request falls under.
+		</p>
+		<br>
+		<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#addDReim">Create Reimbursement Request</button>
+	</div>
+	<div class="col-lg-6">
+		<!-- Trigger the modal with a button -->
+		<p>Use the button below to create a detailed reimbursement request. This means that you are providing as much information 
+		   as possible in order to have your reimbursement approved by a manager. The information you need for this reimbursement 
+		   submission is: reason for the reimbursement, amount that you are asking for, a picture of your receipt as proof to 
+		   compensate you appropriately, and the type of reimbursement your request falls under.
+		</p>
+		<br>
+		<p>To provide a receipt in your reimbursement request please use the following website: <a href="https://imgur.com/">Imgur</a>
+		   to create a post with your receipt. Imgur will provide you with a url link to your receipt picture that you will copy and 
+		   paste into the receipt link part of the reimbursement request form.
+		</p>
+		<br>
+		<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#addFReim">Create Reimbursement Request</button>
+	</div>
+	<br>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addDReim" role="dialog">
+	<div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Adding a Reimbursement</h4>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal" action="addReimbursement" method="post">
+    			<div class="form-group">
+        			<label for="reason" class="control-label col-xs-2">Reason:</label>
+        			<div class="col-xs-10">
+            			<input type="text" class="form-control" name="reason" id="reason" placeholder="Reason" required>
+       				 </div>
+    			</div>
+    			<div class="form-group">
+        			<label for="amount" class="control-label col-xs-2">Amount:</label>
+        			<div class="col-xs-10">
+            			<input type="text" class="form-control" name="amount" id="amount" placeholder="Amount" required>
+       				 </div>
+				</div>
+    			<div class="form-group">
+        			<label for="type" class="control-label col-xs-2">Type:</label>
+        			<div class="col-xs-10">
+            			<input list="types" class="form-control" name="type" id="type" required>
+            			<datalist id="types">
+            				<option id="0">Travel</option>
+            				<option id="1">Event Supplies</option>
+            				<option id="2">Training</option>
+            				<option id="3">Medical</option>
+            			</datalist>
+       				 </div>
+				</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-default" id="rsubmit">Submit</button>
+		</div>
+		</form>
+		</div>
+	</div>
+	</div>
+</div>
+
+<!-- Full Reimbursement Modal -->
+<div class="modal fade" id="addFReim" role="dialog">
+	<div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Adding a Reimbursement</h4>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal" action="addDetailReimbursement" method="post">
+    			<div class="form-group">
+        			<label for="reason" class="control-label col-xs-2">Reason:</label>
+        			<div class="col-xs-10">
+            			<input type="text" class="form-control" name="freason" id="freason" placeholder="Reason" required>
+       				 </div>
+    			</div>
+    			<div class="form-group">
+        			<label for="amount" class="control-label col-xs-2">Amount:</label>
+        			<div class="col-xs-10">
+            			<input type="number" step=".01" class="form-control" name="famount" id="famount" placeholder="Amount" required>
+       				 </div>
+				</div>
+				<div class="form-group">
+        			<label for="receipt" class="control-label col-xs-2">Receipt:</label>
+        			<div class="col-xs-10">
+            			<input type="text" class="form-control" name="freceipt" id="freceipt" placeholder="Receipt Link" required>
+       				 </div>
+    			</div>
+    			<div class="form-group">
+        			<label for="ftype" class="control-label col-xs-2">Type:</label>
+        			<div class="col-xs-10">
+            			<input list="ftypes" class="form-control" name="ftype" id="ftype" required>
+            			<datalist id="ftypes">
+            				<option id="0">Travel</option>
+            				<option id="1">Event Supplies</option>
+            				<option id="2">Training</option>
+            				<option id="3">Medical</option>
+            			</datalist>
+       				 </div>
+				</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-default" id="dsubmit">Submit</button>
+		</div>
+		</form>
+		</div>
+	</div>
+	</div>
+</div>
+</body>
+</html>
